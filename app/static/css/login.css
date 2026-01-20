@@ -1,0 +1,60 @@
+/* Fundo com gradiente animado (lento e suave) */
+.gradient-bg {
+  background: linear-gradient(-45deg, #007bff, #00bfff, #0056b3, #00aaff);
+  background-size: 400% 400%;
+  animation: gradientMove 100s ease infinite;
+}
+
+/* Card branco opaco e centralizado */
+.login-card {
+  width: 100%;
+  max-width: 380px;
+  background: rgba(255, 255, 255, 0.95); /* quase branco e opaco */
+  border-radius: 1rem;
+  box-shadow: 0 0 100px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #000; /* texto padrão preto */
+}
+
+/* Título em branco */
+.login-card h3 {
+  color: #ffffff !important;
+  background: linear-gradient(to right, #007bff, #00bfff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}
+
+/* Campos de texto */
+.login-card .form-control {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+}
+
+/* Botão */
+.login-card .btn-primary {
+  background-color: #007bff;
+  border: none;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s;
+}
+
+.login-card .btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Logo */
+.logo-img {
+  width: 120px;
+  height: auto;
+}
+
+/* Animação do gradiente */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

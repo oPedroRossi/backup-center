@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row g-4">
+
+    <div class="col-md-4">
+        <div class="card-glass">
+            <h6 class="text-muted">Espaço Livre</h6>
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2>1.2 TB</h2>
+                    <small>de 2 TB</small>
+                </div>
+                <i class="bi bi-hdd fs-1 text-primary"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card-glass">
+            <h6 class="text-muted">Backups OK</h6>
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="text-success">124</h2>
+                    <small>Últimas 24h</small>
+                </div>
+                <i class="bi bi-check-circle-fill fs-1 text-success"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card-glass border-danger">
+            <h6 class="text-muted">Falhas</h6>
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="text-danger">3</h2>
+                    <small>Últimas 24h</small>
+                </div>
+                <i class="bi bi-exclamation-triangle-fill fs-1 text-danger"></i>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row g-4 mt-3">
+
+    <div class="col-md-6">
+        <div class="card-glass">
+            <h5>Status do Sistema</h5>
+            <hr>
+            <p>CPU: <strong>23%</strong></p>
+            <p>RAM: <strong>58%</strong></p>
+            <p>I/O Disco: <strong>Normal</strong></p>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card-glass">
+            <h5>Últimos Backups</h5>
+            <hr>
+            <ul class="list-unstyled small">
+                <li class="text-success">✔ Sophos FW01 — 02:10</li>
+                <li class="text-success">✔ Issabel PBX — 02:05</li>
+                <li class="text-success">✔ Huawei Core — 01:58</li>
+                <li class="text-danger">✖ Fortinet FW02 — 01:55</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

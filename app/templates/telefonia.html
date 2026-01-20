@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}Telefonia{% endblock %}
+{% block page_title %}Telefonia{% endblock %}
+
+{% block content %}
+
+<div class="row g-3 mb-4">
+
+    <div class="col-md-3">
+        <div class="card shadow-sm kpi">
+            <div class="card-body">
+                <h6>Equipamentos</h6>
+                <h3>8</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm kpi">
+            <div class="card-body">
+                <h6>Backups OK</h6>
+                <h3 class="status-ok">7</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm kpi">
+            <div class="card-body">
+                <h6>Backups com Falha</h6>
+                <h3 class="status-error">1</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm kpi">
+            <div class="card-body">
+                <h6>Último Backup</h6>
+                <h3>Hoje 02:30</h3>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h5>Equipamentos de Telefonia</h5>
+
+        <table class="table table-hover mt-3">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Tipo</th>
+                    <th>Último Backup</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Issabel-01</td>
+                    <td>Issabel</td>
+                    <td>Hoje 02:30</td>
+                    <td class="status-ok">OK</td>
+                    <td>
+                        <a href="/equipamento/1" class="btn btn-sm btn-primary">Ver backups</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Elastix-02</td>
+                    <td>Elastix</td>
+                    <td>Ontem 23:10</td>
+                    <td class="status-error">Falha</td>
+                    <td>
+                        <a href="/equipamento/2" class="btn btn-sm btn-primary">Ver backups</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
