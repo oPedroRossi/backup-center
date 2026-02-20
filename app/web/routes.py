@@ -26,5 +26,19 @@ def index():
 @web_bp.route("/telefonia")
 @jwt_required()
 def telefonia():
-    return render_template("telefonia.html")
+    return render_template("equipamentos.html")
 
+@web_bp.route("/switchs")
+@jwt_required()
+def switchs():
+    return render_template("equipamentos.html")
+
+@web_bp.route("/firewall")
+@jwt_required()
+def firewall():
+    return render_template("equipamentos.html")
+
+@web_bp.route("/cadastro")
+@jwt_required()
+def cadastro():
+    return render_template("form.html")

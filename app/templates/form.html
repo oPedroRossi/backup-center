@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+
+<div class="container vh-100 d-flex align-items-center justify-content-center">
+    <div class="col-md-6">
+        <div class="apple-card">
+
+            <div class="mb-4 text-center">
+                <h3 class="page-title">Cadastrar Device</h3>
+                <p class="subtitle">Gerencie sua infraestrutura com elegância</p>
+            </div>
+
+            <form id="deviceForm" novalidate>
+
+                <div class="mb-3">
+                    <label class="form-label">Nome</label>
+                    <input type="text" class="form-control" name="name" required minlength="3">
+                    <div class="invalid-feedback">
+                        O nome deve ter pelo menos 3 caracteres.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Tipo do Dispositivo</label>
+                    <select class="form-select" name="device_type" id="deviceType" required>
+                        <option value="">Selecione...</option>
+                        <option value="firewall">Firewall</option>
+                        <option value="switch">Switch</option>
+                        <option value="telefonia">Telefonia</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Selecione um tipo de dispositivo.
+                    </div>
+                </div>
+
+
+                <div class="mb-3">
+                    <label class="form-label">Modelo</label>
+                    <select class="form-select" name="model" id="modelSelect" required>
+                        <option value="">Selecione o tipo primeiro...</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Informe o modelo do dispositivo.
+                    </div>
+                </div>
+
+
+                <div class="mb-4">
+                    <label class="form-label">Endereço IP</label>
+                    <input type="text" class="form-control" name="ip_address" required>
+                    <div class="invalid-feedback">
+                        Informe um endereço IP válido.
+                    </div>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-apple">
+                        Cadastrar Device
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/form.js') }}"></script>
+{% endblock %}
