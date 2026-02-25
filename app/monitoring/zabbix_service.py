@@ -1,6 +1,6 @@
 import requests
-from app.config import Config
-from app.utils.metrics import bytes_to_gb, status_by_percent, status_cpu
+from app.core.config import Config
+from app.monitoring.metrics import *
 
 def zabbix_login():
     payload = {

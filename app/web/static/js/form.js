@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const models = {
         firewall: ["Sophos", "Fortinet"],
         switch: ["HPE", "Huawei"],
-        telefonia: ["Elastix", "Issabel"]
+        telefonia: ["Elastix", "Issabel", "UCM"]
     };
 
     deviceType.addEventListener("change", function () {

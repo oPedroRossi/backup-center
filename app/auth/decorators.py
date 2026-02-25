@@ -1,7 +1,7 @@
 import jwt
 from flask import request, jsonify
 from functools import wraps
-from app.config import Config
+from app.core.config import Config
 
 def jwt_required(f):
     @wraps(f)

@@ -1,11 +1,15 @@
 from flask import Blueprint, render_template, jsonify, url_for, request, make_response, redirect
 from flask_jwt_extended import jwt_required, get_jwt_identity, unset_jwt_cookies
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 web_bp = Blueprint(
     "web",
     __name__,
-    template_folder="../templates",
-    static_folder="../static"
+    template_folder=os.path.join(BASE_DIR, "templates"),
+    static_folder=os.path.join(BASE_DIR, "static"),
+    static_url_path="/web_static"
 )
 
 @web_bp.route("/login")
@@ -23,20 +27,10 @@ def logout():
 def index():
     return render_template("dashboard.html")
 
-@web_bp.route("/telefonia")
+@web_bp.route("/equipaments/<equipament_type>")
 @jwt_required()
-def telefonia():
-    return render_template("equipamentos.html")
-
-@web_bp.route("/switchs")
-@jwt_required()
-def switchs():
-    return render_template("equipamentos.html")
-
-@web_bp.route("/firewall")
-@jwt_required()
-def firewall():
-    return render_template("equipamentos.html")
+def telefonia(equipament_type):
+    return render_template("equipament.html", equipament_type=equipament_type)
 
 @web_bp.route("/cadastro")
 @jwt_required()

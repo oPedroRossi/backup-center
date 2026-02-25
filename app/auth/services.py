@@ -1,5 +1,5 @@
 from ldap3 import Server, Connection, ALL
-from app.config import Config
+from app.core.config import Config
 
 
 def authenticate_user(username: str, password: str) -> bool:

@@ -9,8 +9,8 @@
     <div class="col-md-3">
         <div class="card shadow-sm kpi">
             <div class="card-body">
-                <h6>Equipamentos</h6>
-                <h3>8</h3>
+                <h6>Backups cadastrados</h6>
+                <h3 id="kpiTotal">0</h3>
             </div>
         </div>
     </div>
@@ -19,7 +19,7 @@
         <div class="card shadow-sm kpi">
             <div class="card-body">
                 <h6>Backups OK</h6>
-                <h3 class="status-ok">7</h3>
+                <h3 id="kpiOk" class="status-ok">0</h3>
             </div>
         </div>
     </div>
@@ -28,7 +28,7 @@
         <div class="card shadow-sm kpi">
             <div class="card-body">
                 <h6>Backups com Falha</h6>
-                <h3 class="status-error">1</h3>
+                <h3 id="kpiFail" class="status-error">0</h3>
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@
         <div class="card shadow-sm kpi">
             <div class="card-body">
                 <h6>Último Backup</h6>
-                <h3>Hoje 02:30</h3>
+                <h3 id="kpiLastBackup">-</h3>
             </div>
         </div>
     </div>
@@ -46,7 +46,7 @@
 
 <div class="card shadow-sm">
     <div class="card-body">
-        <h5>Equipamentos de Telefonia</h5>
+        <h5>Equipamentos:</h5>
 
         <table class="table table-hover mt-3">
             <thead>
@@ -58,28 +58,32 @@
                     <th>Ações</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Issabel-01</td>
-                    <td>Issabel</td>
-                    <td>Hoje 02:30</td>
-                    <td class="status-ok">OK</td>
-                    <td>
-                        <a href="/equipamento/1" class="btn btn-sm btn-primary">Ver backups</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Elastix-02</td>
-                    <td>Elastix</td>
-                    <td>Ontem 23:10</td>
-                    <td class="status-error">Falha</td>
-                    <td>
-                        <a href="/equipamento/2" class="btn btn-sm btn-primary">Ver backups</a>
-                    </td>
-                </tr>
-            </tbody>
+
+            <div class="d-flex justify-content-between mb-3">
+                <input type="text" id="searchInput" class="form-control w-25" placeholder="Buscar por nome...">
+
+
+
+
+                <tbody id="equipamentTableBody">
+                    <!-- Linhas de equipamentos serão inseridas aqui via JavaScript -->
+                </tbody>
         </table>
+        <div>
+            <button id="prevPage" class="btn btn-sm btn-outline-primary">Anterior</button>
+            <span id="pageInfo" class="mx-2"></span>
+            <button id="nextPage" class="btn btn-sm btn-outline-primary">Próximo</button>
+        </div>
     </div>
 </div>
+</div>
+
+<script src="{{ url_for('web.static', filename='js/equipament.js') }}"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        loadEquipaments("{{ equipament_type }}");
+    });
+</script>
 
 {% endblock %}

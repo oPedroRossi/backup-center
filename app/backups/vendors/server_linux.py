@@ -1,7 +1,7 @@
 import paramiko
 
 
-def get_config(device):
+def get_config_linux(device):
 
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())

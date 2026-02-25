@@ -1,8 +1,7 @@
 import os
-from app import db
-from app.models import Device, BackupLog, AuditLog
+from app.core.extensions import db
+from app.devices.models import Device, BackupLog, AuditLog
 from sqlalchemy.exc import SQLAlchemyError
-
 
 def create_device_service(data: dict):
 
@@ -80,7 +79,12 @@ def create_log_entry(device_name, action, entity):
 
 def get_logs_device():
     try:
-        logs = AuditLog.query.order_by(AuditLog.created_at.desc()).all()
+        logs = (
+            AuditLog.query
+            .order_by(AuditLog.created_at.desc())
+            .limit(5)
+            .all()
+        )
         return [
             {
                 "device_name": log.device_name,
@@ -93,4 +97,37 @@ def get_logs_device():
             for log in logs
         ]
     except SQLAlchemyError as e:
+        return {"error": str(e)}, 500
+
+def get_equipament(device_type):
+    try:
+        devices = Device.query.filter_by(device_type=device_type).all()
+        return [
+            {
+                "id": device.id,
+                "name": device.name,
+                "device_type": device.device_type,
+                "model": device.model,
+                "ip_address": device.ip_address,
+                "last_status": device.last_status,
+                "last_backup": device.last_backup.isoformat() if device.last_backup else None
+            }
+            for device in devices
+        ]
+    except SQLAlchemyError as e:
+        return {"error": str(e)}, 500
+
+def delete_device(device_id):
+    try:
+        device = Device.query.get(device_id)
+        if not device:
+            return {"error": "Device não encontrado"}, 404
+
+        db.session.delete(device)
+        db.session.commit()
+
+        return {"message": "Device deletado com sucesso"}, 200
+
+    except SQLAlchemyError as e:
+        db.session.rollback()
         return {"error": str(e)}, 500

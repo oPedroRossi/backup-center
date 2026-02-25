@@ -1,25 +1,20 @@
 from flask import Flask, redirect, url_for, request
-from flask_jwt_extended import JWTManager
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from app.config import Config
-
-db = SQLAlchemy()
-migrate = Migrate()
+from datetime import timedelta
+from app.core.config import Config
+from app.core.extensions import db, migrate, jwt
+import os
 
 
 def create_app():
-    app = Flask(__name__)
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
+    app = Flask( __name__)
 
     # =========================
-    # CONFIGURAÇÕES DO BANCO
+    # CONFIGURAÇÕES
     # =========================
-    app.config["SQLALCHEMY_DATABASE_URI"] = Config.SQLALCHEMY_DATABASE_URI
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
-    # =========================
-    # CONFIGURAÇÕES JWT
-    # =========================
+    app.config.from_object(Config)
+    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=2)
     app.config["JWT_SECRET_KEY"] = Config.JWT_SECRET_KEY
     app.config["JWT_TOKEN_LOCATION"] = ["cookies"]
     app.config["JWT_COOKIE_SECURE"] = False
@@ -27,19 +22,23 @@ def create_app():
     app.config["JWT_COOKIE_SAMESITE"] = "Lax"
     app.config["JWT_COOKIE_CSRF_PROTECT"] = False
 
-    # Inicializa extensões 
+    # =========================
+    # INICIALIZA EXTENSÕES
+    # =========================
     db.init_app(app)
     migrate.init_app(app, db)
-    jwt = JWTManager(app)
+    jwt.init_app(app)
 
     # =========================
     # BLUEPRINTS
     # =========================
-    from app.api.routes import api_bp
+    from app.auth.routes import auth_api_bp
+    from app.devices.routes import devices_api_bp
     from app.web.routes import web_bp
 
     app.register_blueprint(web_bp)
-    app.register_blueprint(api_bp, url_prefix="/api")
+    app.register_blueprint(auth_api_bp, url_prefix="/api")
+    app.register_blueprint(devices_api_bp, url_prefix="/api")
 
     # =========================
     # HANDLERS JWT
